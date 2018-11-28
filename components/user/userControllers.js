@@ -1,3 +1,4 @@
+require('dotenv').config({ debug: process.env.DEBUG })
 const User = require('./userModel')
 const jtw = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
@@ -14,7 +15,7 @@ module.exports = {
     })
       .then((insertedUser) => {
         let { department } = insertedUser
-        let token = jtw.sign({ department }, 'lol', {
+        let token = jtw.sign({ department }, process.env.SHHH, {
           expiresIn: '1d'
         })
         return res.status(201).json({ token })
@@ -40,7 +41,7 @@ module.exports = {
         const lol = bcrypt.compareSync(credentials.password, user.password)
         if (lol === true) {
           let { department } = insertedUser
-          let token = jtw.sign({ department }, 'lol', {
+          let token = jtw.sign({ department }, process.env.SHHH, {
             expiresIn: '1d'
           })
           res.status(200).json({ mes: 'Logged In', token })
@@ -54,7 +55,7 @@ module.exports = {
   restricted (req, res, next) {
     const token = req.headers.authorization
     if (token) {
-      jtw.verify(token, 'lol', (err, decodedToken) => {
+      jtw.verify(token, process.env.SHHH, (err, decodedToken) => {
         if (err) {
           return res
             .status(401)
