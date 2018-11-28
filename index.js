@@ -1,6 +1,6 @@
 const server = require('express')()
-require('./api/middleware')(server)
-require('./api/routeApis')(server)
+require('./middlewares')(server)
+require('./components/user/')(server)
 
 server.listen(8000, () => {
   console.log('\n=== API RUNNING... ===\n')
