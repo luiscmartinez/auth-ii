@@ -1,18 +1,34 @@
-const Sequelize = require('sequelize')
-const sequelize = require('../index')
-let User = sequelize.define('users', {
-  username: {
-    type: Sequelize.STRING,
-    unique: true,
-    allowNull: false
-  },
-  password: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  department: {
-    type: Sequelize.STRING
-  }
-})
-sequelize.sync({ force: true })
-module.exports = User
+'use strict'
+
+module.exports = (sequelize, DataTypes) => {
+  // can replace DataTypes with Sequelize to match migration tables
+  // DataTypes reads better in this case
+  const Users = sequelize.define(
+    'Users',
+    {
+      username: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false,
+        validate: {
+          requirements: function (bodyValues) {
+            if (bodyValues.length <= 3 || bodyValues.length > 20) {
+              throw new Error('requirement')
+            }
+          }
+        }
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      department: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
+    },
+    {}
+  )
+  Users.associate = function (models) {}
+  return Users
+}

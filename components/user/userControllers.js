@@ -1,5 +1,5 @@
 require('dotenv').config({ debug: process.env.DEBUG })
-const User = require('./userModel')
+const { sequelize, Users } = require('../')
 const jtw = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
@@ -8,7 +8,7 @@ module.exports = {
   registerUser (req, res, next) {
     let { password, username, department } = req.body
     password = bcrypt.hashSync(password, 10)
-    User.create({
+    Users.create({
       username,
       password,
       department
@@ -23,7 +23,7 @@ module.exports = {
       .catch(next)
   },
   getUsers (req, res, next) {
-    User.all()
+    Users.all()
       .then((users) => {
         return res.status(200).json({ users })
       })
@@ -33,14 +33,14 @@ module.exports = {
   // LOGIN
   login (req, res, next) {
     const credentials = req.body
-    User.findOne({
+    Users.findOne({
       where: { username: `${credentials.username}` }
     })
       .then((insertedUser) => {
-        let user = insertedUser
-        const lol = bcrypt.compareSync(credentials.password, user.password)
+        if (insertedUser === null) return next(Error('wrong credentials'))
+        let { password, department } = insertedUser
+        const lol = bcrypt.compareSync(credentials.password, password)
         if (lol === true) {
-          let { department } = insertedUser
           let token = jtw.sign({ department }, process.env.SHHH, {
             expiresIn: '1d'
           })
@@ -51,7 +51,8 @@ module.exports = {
       })
       .catch(next)
   },
-  // restricted
+
+  //restricted
   restricted (req, res, next) {
     const token = req.headers.authorization
     if (token) {
@@ -68,9 +69,10 @@ module.exports = {
       return res.status(401).json({ error: 'you shall not pass!! - no token' })
     }
   },
+
   departmentUsers (req, res, next) {
-    const department = req.token.department
-    User.findAll({
+    const { department } = req.token
+    Users.findAll({
       where: { department }
     })
       .then((response) => {
