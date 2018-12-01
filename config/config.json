@@ -5,7 +5,7 @@
     "database": null,
     "host": null,
     "dialect": "sqlite",
-    "storage": "./database.sqlite",
+    "storage": "./thedatabase.sqlite",
     "operatorsAliases": "Op"
   },
   "test": {
