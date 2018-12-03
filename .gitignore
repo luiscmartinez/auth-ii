@@ -5,4 +5,4 @@ database.sqlite
 .env
 package-lock.json
 thedatabase.sqlite
-thedatabase.sqlite-journal
+.gitignore
