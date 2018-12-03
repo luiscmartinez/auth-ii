@@ -8,18 +8,13 @@
     "storage": "./thedatabase.sqlite",
     "operatorsAliases": "Op"
   },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
   "production": {
-    "username": "root",
+    "username": null,
     "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "database": null,
+    "host": null,
+    "dialect": "sqlite",
+    "storage": "./thedatabase.sqlite",
+    "operatorsAliases": "Op"
   }
 }
