@@ -31,7 +31,7 @@ passport.use(
         .transaction()
         .then((transaction) => {
           return Google_users.findOrCreate({
-            transaction: transaction,
+            // transaction: transaction,
             where: {
               id: profile.id,
               name: profile.displayName,
