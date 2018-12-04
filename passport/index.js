@@ -58,7 +58,7 @@ module.exports = (server) => {
     '/auth/google/callback',
     passport.authenticate('google'),
     function (req, res) {
-      return res.redirect('/users')
+      return res.redirect('http://localhost:3000/users')
     }
   )
 }

@@ -7,6 +7,9 @@ require('./middlewares')(server) // run thru middleware
 
 require('./components/user/')(server) // run thru components
 require('./passport')(server)
+server.get('/', (req, res) => {
+  res.status(200).json({ sanity: 'check' })
+})
 require('./errorhandling')(server) // run thru errorhandlers
 
 server.set('port', port)
