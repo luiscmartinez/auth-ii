@@ -9,7 +9,7 @@ const db = {}
 let sequelize
 if (process.env.NODE_ENV === 'production') {
   console.log('pDBURL', process.env.DATABASE_URL)
-  sequelize = new Sequelize(process.env.DATABASE_URL)
+  sequelize = new Sequelize(process.env.DATABASE_URL, { logging: true })
 } else {
   console.log('IN ELSE')
   sequelize = new Sequelize(
