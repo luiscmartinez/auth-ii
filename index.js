@@ -9,7 +9,7 @@ require('./components/user/')(server) // run thru components
 require('./passport')(server)
 require('./errorhandling')(server) // run thru errorhandlers
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync().then(() => {
   server.listen(process.env.PORT, () => {
     console.log('\n=== API RUNNING... ===\n')
   })
