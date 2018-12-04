@@ -4,7 +4,7 @@
   "description": "## Topics",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start:dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -42,9 +42,7 @@
   "devDependencies": {
     "nodemon": "^1.18.3"
   },
-  "keywords": [
-    "heroku"
-  ],
+  "keywords": [ "heroku" ],
   "engines": {
     "node": "10.x"
   }
