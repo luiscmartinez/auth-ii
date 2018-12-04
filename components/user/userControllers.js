@@ -1,4 +1,4 @@
-require('dotenv').config({ debug: process.env.DEBUG })
+require('dotenv').config()
 const { sequelize, Users } = require('../')
 const jtw = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')

@@ -1,4 +1,5 @@
 'use strict'
+require('dotenv').config()
 const { lstatSync, readdirSync } = require('fs')
 const { join } = require('path')
 const Sequelize = require('sequelize') // create Sequelize object & connect to DB
@@ -7,8 +8,8 @@ const config = require('../config/config.json')[env]
 const db = {}
 
 let sequelize
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config)
+if (config) {
+  sequelize = new Sequelize(config)
 } else {
   sequelize = new Sequelize(
     config.database,
