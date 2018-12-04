@@ -1,4 +1,5 @@
 'use strict'
+require('dotenv').config()
 const { lstatSync, readdirSync } = require('fs')
 const { join } = require('path')
 const Sequelize = require('sequelize') // create Sequelize object & connect to DB
@@ -8,10 +9,8 @@ const db = {}
 
 let sequelize
 if (process.env.NODE_ENV === 'production') {
-  console.log('pDBURL', process.env.DATABASE_URL)
   sequelize = new Sequelize(process.env.DATABASE_URL, { logging: true })
 } else {
-  console.log('IN ELSE')
   sequelize = new Sequelize(
     config.database,
     config.username,
