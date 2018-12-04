@@ -19,6 +19,6 @@ module.exports = (server) => {
   server.use(cors())
   server.use(logger('dev'))
   server.use(helmet())
-  server.use(limiter)
+  // server.use(limiter)
   server.use(cookieSession(cookieConfig))
 }

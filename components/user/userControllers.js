@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { sequelize, Users } = require('../')
+const { sequelize, Users, Google_users } = require('../')
 const jtw = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
@@ -23,7 +23,7 @@ module.exports = {
       .catch(next)
   },
   getUsers (req, res, next) {
-    Users.all()
+    Google_users.all()
       .then((users) => {
         return res.status(200).json({ users })
       })
