@@ -43,7 +43,9 @@
   "devDependencies": {
     "nodemon": "^1.18.3"
   },
-  "keywords": [ "heroku" ],
+  "keywords": [
+    "heroku"
+  ],
   "engines": {
     "node": "10.x"
   }
