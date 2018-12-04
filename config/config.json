@@ -10,12 +10,6 @@
   },
 
   "production": {
-    "username": "chivo",
-    "password": null,
-    "database": "chivo",
-    "host": "localhost",
-    "port": 5432,
-    "dialect": "postgres",
-    "operatorsAliases": "Op"
+    "use_env_variable": "DATABASE_URL"
   }
 }

@@ -7,8 +7,14 @@ const config = require('../config/config.json')[env]
 const db = {}
 
 let sequelize
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env.DATABASE_URL, config)
+if (process.env.DATABASE_UR) {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    port: 5432,
+    host: 'ec2-54-225-110-156.compute-1.amazonaws.com',
+    logging: true //false
+  })
 } else {
   sequelize = new Sequelize(
     config.database,
