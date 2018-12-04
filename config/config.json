@@ -10,6 +10,6 @@
   },
 
   "production": {
-    "use_env_variable": "DATABASE_URL"
+    "use_env_variable": "postgres://mdxhojmgqsznis:1859314243b6fe3aafe2c122961a6533301f665890ebfb0c7468e1687428f735@ec2-54-197-249-140.compute-1.amazonaws.com:5432/dforloiagr64a8"
   }
 }
