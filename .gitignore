@@ -2,5 +2,5 @@
 node_modules/
 .env
 package-lock.json
-thedatabase.sqlite
 .gitignore
+/Users/chivo/lambda-pm/auth-ii/thedatabase.sqlite

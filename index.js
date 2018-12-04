@@ -1,6 +1,7 @@
-require('dotenv').config({ debug: process.env.DEBUG })
+require('dotenv').config()
 const server = require('express')()
 const { sequelize, Users, Google_users } = require('./components')
+const port = process.env.PORT || 8000
 
 require('./middlewares')(server) // run thru middleware
 

@@ -28,7 +28,8 @@ passport.use(
             where: {
               id: profile.id,
               name: profile.displayName,
-              email: profile.emails[0].value
+              email: profile.emails[0].value,
+              photo: profile.photos[0].value
             }
           })
             .spread((google_users, created) => {
