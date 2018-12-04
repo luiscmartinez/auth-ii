@@ -10,7 +10,7 @@ require('./passport')(server)
 require('./errorhandling')(server) // run thru errorhandlers
 
 sequelize.sync().then(() => {
-  server.listen(process.env.PORT, () => {
+  server.listen(port, () => {
     console.log('\n=== API RUNNING... ===\n')
   })
 })
