@@ -1,4 +1,4 @@
-require('dotenv').config({ debug: process.env.DEBUG })
+require('dotenv').config()
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const { sequelize, Users, Google_users } = require('../components')
@@ -49,19 +49,4 @@ passport.use(
 module.exports = (server) => {
   server.use(passport.initialize())
   server.use(passport.session())
-  server.get(
-    '/auth/google',
-    passport.authenticate('google', { scope: [ 'profile', 'email' ] })
-  )
-
-  server.get(
-    '/auth/google/callback',
-    {
-      failureRedirect: 'https://damp-peak-67680.herokuapp.com/'
-    },
-    passport.authenticate('google'),
-    function (req, res) {
-      return res.redirect('http://localhost:3000/users')
-    }
-  )
 }
