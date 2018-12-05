@@ -10,8 +10,6 @@ let sequelize
 if (process.env.DATABASE_UR) {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
-    port: process.env.PORT || 8000,
-    host: '0.0.0.0',
     logging: true //false
   })
 } else {
