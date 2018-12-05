@@ -12,7 +12,8 @@ server.get('/', (req, res) => {
 require('./errorhandling')(server) // run thru errorhandlers
 
 sequelize.sync().then(() => {
-  server.listen(process.env.PORT || 8000, '0.0.0.0', () =>
+  server.listen(process.env.PORT || 8000, '0.0.0.0', () => {
     console.log('\n=== API RUNNING... ===\n')
-  )
+    console.log(process.env.PORT || 8000)
+  })
 })
