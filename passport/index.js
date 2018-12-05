@@ -20,7 +20,6 @@ passport.use(
       callbackURL: process.env.CB_URL
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile)
       return sequelize
         .transaction()
         .then((transaction) => {
