@@ -7,10 +7,10 @@ router.get(
   passport.authenticate('google', { scope: [ 'profile', 'email' ] })
 )
 
-router.post(
+router.get(
   '/callback',
   passport.authenticate('google', {
-    failureRedirect: 'https://damp-peak-67680.herokuapp.com/'
+    failureRedirect: 'https://damp-peak-67680.herokuapp.com'
   }),
   controller.redirect
 )
