@@ -51,21 +51,15 @@ module.exports = (server) => {
   server.use(passport.session())
   server.get(
     '/auth/google',
-    passport.authenticate('google', {
-      scope: [
-        'https://www.googleapis.com/auth/drive.readonly',
-        'profile',
-        'email'
-      ]
-    })
+    passport.authenticate('google', { scope: [ 'profile', 'email' ] })
   )
 
   server.get(
     '/auth/google/callback',
-    passport.authenticate('google'),
     {
-      failureRedirect: 'https://damp-peak-67680.herokuapp.com	'
+      failureRedirect: 'https://damp-peak-67680.herokuapp.com/'
     },
+    passport.authenticate('google'),
     function (req, res) {
       return res.redirect('http://localhost:3000/users')
     }
