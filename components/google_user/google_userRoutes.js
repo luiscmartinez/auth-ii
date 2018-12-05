@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const controller = require('./google_userControllers')
+const passport = require('passport')
 
 router.get(
   '/',
