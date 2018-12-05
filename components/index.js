@@ -8,10 +8,7 @@ const db = {}
 
 let sequelize
 if (process.env.DATABASE_UR) {
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'postgres',
-    logging: true //false
-  })
+  sequelize = new Sequelize(process.env.DATABASE_URL)
 } else {
   sequelize = new Sequelize(
     config.database,
