@@ -51,7 +51,13 @@ module.exports = (server) => {
   server.use(passport.session())
   server.get(
     '/auth/google',
-    passport.authenticate('google', { scope: [ 'profile', 'email' ] })
+    passport.authenticate('google', {
+      scope: [
+        'https://www.googleapis.com/auth/drive.file',
+        'profile',
+        'email'
+      ]
+    })
   )
 
   server.get(
