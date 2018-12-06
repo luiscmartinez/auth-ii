@@ -12,7 +12,7 @@ server.get('/', (req, res) => {
   let token = jwt.sign({ google: 'google' }, process.env.SHHH, {
     expiresIn: '1d'
   })
-  return res.status(200).redirect(`${process.env.SUCCESS_URL}${token}`)
+  return res.status(200).redirect(`${process.env.SUCCESS_URL}`)
 })
 
 require('./errorhandling')(server) // run thru errorhandlers
