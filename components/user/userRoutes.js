@@ -9,7 +9,7 @@ router.post('/login', controller.login)
 // post message
 router.post('/post', controller.post)
 
-router.get('/post', controller.restricted, controller.forum)
+router.get('/post', controller.forum)
 
 // Restricted
 router.get('/restricted', controller.restricted, controller.getUsers)
