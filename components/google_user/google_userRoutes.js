@@ -14,7 +14,7 @@ router.get(
   }),
   (req, res) => {
     // On success, redirect back to '/'
-    return res.redirect('/')
+    return res.redirect('/users')
   }
 )
 
