@@ -1,24 +1,25 @@
 require('dotenv').config()
-const { sequelize, Users, Google_users } = require('../')
+const { sequelize, Users, Google_users, Forums } = require('../')
 const jtw = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 module.exports = {
   // REGISTER
   registerUser (req, res, next) {
-    let { password, username, department } = req.body
+    console.log('herhehrehr', req.body)
+    let { password, username } = req.body
     password = bcrypt.hashSync(password, 10)
     Users.create({
       username,
-      password,
-      department
+      password
     })
       .then((insertedUser) => {
-        let { department } = insertedUser
-        let token = jtw.sign({ department }, process.env.SHHH, {
+        let username = insertedUser.dataValues.username
+        let token = jtw.sign({ username }, process.env.SHHH, {
           expiresIn: '1d'
         })
-        return res.status(201).json({ token })
+
+        return res.json({ mes: token })
       })
       .catch(next)
   },
@@ -37,25 +38,28 @@ module.exports = {
       where: { username: `${credentials.username}` }
     })
       .then((insertedUser) => {
+        console.log(insertedUser)
         if (insertedUser === null) return next(Error('wrong credentials'))
-        let { password, department } = insertedUser
+        let { password, username } = insertedUser.dataValues
+
         const lol = bcrypt.compareSync(credentials.password, password)
         if (lol === true) {
-          let token = jtw.sign({ department }, process.env.SHHH, {
+          let token = jtw.sign({ username }, process.env.SHHH, {
             expiresIn: '1d'
           })
-          res.status(200).json({ mes: 'Logged In', token })
+          res.status(200).json({ mes: token })
         } else {
           return res.status(401).json({ error: 'U shall not pass!' })
         }
       })
       .catch(next)
   },
-
   //restricted
   restricted (req, res, next) {
+    console.log(req.headers)
     const token = req.headers.authorization
     if (token) {
+      console.log(req.session)
       jtw.verify(token, process.env.SHHH, (err, decodedToken) => {
         if (err) {
           return res
@@ -79,5 +83,20 @@ module.exports = {
         return res.status(200).json(response)
       })
       .catch(next)
+  },
+  logout (req, res, next) {
+    res.status(200).redirect('http://localhost:3000/')
+  },
+  post (req, res, next) {
+    const post = req.body.post
+    console.log(post)
+    Forums.create({ post }).then((createdPost) => {
+      return res.status(200).json({ mes: 'success' })
+    })
+  },
+  forum (req, res, next) {
+    Forums.all().then((formResponse) => {
+      return res.status(200).json(formResponse)
+    })
   }
 }

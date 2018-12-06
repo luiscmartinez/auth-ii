@@ -19,10 +19,11 @@ router.get(
     } else {
       res.redirect('/auth/google')
     }
+    next()
   },
   (req, res) => {
     // On success, redirect back to '/'
-    res.redirect('/')
+    return res.redirect('/')
   }
 )
 
