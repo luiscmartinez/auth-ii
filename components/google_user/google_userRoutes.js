@@ -12,15 +12,6 @@ router.get(
   passport.authenticate('google', {
     failureRedirect: '/'
   }),
-  (err, req, res, next) => {
-    // custom error handler to catch any errors, such as TokenError
-    if (err.name === 'TokenError') {
-      res.redirect('/auth/google') // redirect them back to the login page
-    } else {
-      res.redirect('/auth/google')
-    }
-    next()
-  },
   (req, res) => {
     // On success, redirect back to '/'
     return res.redirect('/')
