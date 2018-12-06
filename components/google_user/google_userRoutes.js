@@ -14,7 +14,7 @@ router.get(
   }),
   (req, res) => {
     // On success, redirect back to '/'
-    return res.redirect('https://jolly-galileo-e12c1d.netlify.com/users')
+    return res.redirect(process.env.REDIRECT_URL)
   }
 )
 

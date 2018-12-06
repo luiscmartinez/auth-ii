@@ -1,4 +1,7 @@
 require('dotenv').config()
+const { Sequelize } = require('./components')
+const Sequelize = require('sequelize') // create Sequelize object & connect to DB
+
 const express = require('express')
 const cors = require('cors')
 const logger = require('morgan')
@@ -10,6 +13,13 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100
 })
+
+var SequelizeStore = require('connect-session-sequelize')(session.Store)
+
+var myStore = new SequelizeStore({
+  db: sequelize
+})
+
 const cookieConfig = {
   maxAge: 60000 * 20,
   secret: process.env.COOKIE_KEY
