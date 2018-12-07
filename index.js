@@ -107,10 +107,11 @@ server.get('/api/forum', (req, res, next) => {
 
 server.get('/api/profile', (req, res) => {
   const str = req.headers.referer
-  var id = str.substr(str.indexOf('/:') + 2)
+  var id = str.substr(str.indexOf('users/:') + 7)
   Google_users.findById(id).then((user) => {
     console.log(user.dataValues)
-    res.status(200).json(user.dataValues)
+    const profile = user.dataValues || user
+    res.status(200).json(profile)
   })
 })
 
