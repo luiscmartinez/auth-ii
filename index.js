@@ -86,8 +86,7 @@ server.get(
   passport.authenticate('google'),
   (req, res, next) => {
     console.log(req.user)
-
-    res.redirect(`http://localhost:3000/users/:${req.session.passport.user}`)
+    res.redirect(`http://localhost:3000/users`)
   }
 )
 
