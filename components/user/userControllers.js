@@ -26,6 +26,7 @@ module.exports = {
   getUsers (req, res, next) {
     Google_users.all()
       .then((users) => {
+        console.log('IN USERS')
         return res.status(200).json({ users })
       })
       .catch(next)
@@ -95,8 +96,12 @@ module.exports = {
     })
   },
   forum (req, res, next) {
-    Forums.all().then((formResponse) => {
-      return res.status(200).json(formResponse)
-    })
+    Forums.findAll()
+      .then((response) => {
+        // req.isAuthenticated()
+        console.log(req.isAuthenticated())
+        return res.status(200).json({ response })
+      })
+      .catch((err) => console.log(err))
   }
 }
