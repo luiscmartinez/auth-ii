@@ -85,8 +85,7 @@ server.get(
   (req, res, next) => {
     console.log(req.user)
     res.redirect(
-      `https://upbeat-pare-f6975c.netlify.com/users/:${req.session.passport
-        .user}`
+      `https://snapghost.netlify.com/users/:${req.session.passport.user}`
     )
   }
 )
@@ -107,7 +106,9 @@ server.get('/api/forum', (req, res, next) => {
 
 server.get('/api/profile', (req, res) => {
   const str = req.headers.referer
-  var id = str.substr(str.indexOf('users/:') + 7)
+  console.log('DJKSLAKLDJKLASJDL:JASL:', str)
+  const id = str.replace(/\d+/g, '')
+  // var id = str.substr(str.indexOf('user/:') + 7)
   Google_users.findById(id).then((user) => {
     console.log(user.dataValues)
     const profile = user.dataValues || user
