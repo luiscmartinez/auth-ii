@@ -47,7 +47,6 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
       Google_users.findOne({ where: { id: profile.id } }).then((user) => {
         if (user) {
-          //already have the user
           console.log('user is', user.dataValues)
           done(null, user.dataValues)
         } else {
@@ -57,7 +56,6 @@ passport.use(
             email: profile.emails[0].value,
             photo: profile.photos[0].value
           }).then((newUser) => {
-            console.log('new user created:', newUser.dataValues)
             done(null, newUser.dataValues)
           })
         }
@@ -86,7 +84,7 @@ server.get(
   passport.authenticate('google'),
   (req, res, next) => {
     console.log(req.user)
-    res.redirect(`http://localhost:3000/users`)
+    res.redirect(`http://localhost:3000/users/:${req.session.passport.user}`)
   }
 )
 
