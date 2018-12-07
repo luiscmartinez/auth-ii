@@ -85,7 +85,8 @@ server.get(
   (req, res, next) => {
     console.log(req.user)
     res.redirect(
-      `https://upbeat-pare-f6975c.netlify.com/:${req.session.passport.user}`
+      `https://upbeat-pare-f6975c.netlify.com/users/:${req.session.passport
+        .user}`
     )
   }
 )
