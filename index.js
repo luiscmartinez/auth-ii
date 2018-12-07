@@ -105,11 +105,12 @@ server.get('/api/forum', (req, res, next) => {
 })
 
 server.get('/api/profile', (req, res) => {
-  const str = req.headers.referer
+  const string = req.headers.referer
   console.log('DJKSLAKLDJKLASJDL:JASL:', str)
-  const id = str.replace(/\d+/g, '')
-  // var id = str.substr(str.indexOf('user/:') + 7)
-  Google_users.findById(id).then((user) => {
+  var regex = /[\d|,|.|e|E|\+]+/g
+
+  var matches = string.match(regex)
+  Google_users.findById(matches[matches.length - 1]).then((user) => {
     console.log(user.dataValues)
     const profile = user.dataValues || user
     res.status(200).json(profile)
